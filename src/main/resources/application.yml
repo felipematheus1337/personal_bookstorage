@@ -1,1 +1,13 @@
-spring.application.name=app
+spring:
+  application:
+    name: app
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+rabbitmq:
+  queue = bookstorage
+
+
