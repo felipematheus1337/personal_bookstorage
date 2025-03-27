@@ -21,7 +21,7 @@ public class BookProcessingConsumer {
     private final UserRepository repository;
     private final BookRepository bookRepository;
     private final S3Service s3Service;
-    private static final Logger log = LoggerFactory.getLogger(BookPro   cessingConsumer.class);
+    private static final Logger log = LoggerFactory.getLogger(BookProcessingConsumer.class);
 
     public BookProcessingConsumer(UserRepository repository,
                                   S3Service s3Service, BookRepository bookRepository) {
@@ -57,7 +57,7 @@ public class BookProcessingConsumer {
                   userToSave.getBooks().add(savedBook);
                   repository.save(userToSave);
 
-                  log.info("Book saved successfully for user ID: {}", userId);
+                  log.info("Book saved successfully for user ID: {}", id);
 
               })
               .exceptionally(ex -> {
