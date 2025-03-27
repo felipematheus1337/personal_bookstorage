@@ -44,9 +44,11 @@ public class BusinessController {
                                               @RequestParam("file") MultipartFile file) {
 
         try {
-            BookCreateDTO dto = this.objectMapper.readValue(metadataJSON, BookCreateDTO.class);
+            var dto = this.objectMapper.readValue(metadataJSON, BookCreateDTO.class);
             String fileName = BusinessHelperUtil.normalizeFileName(file.getOriginalFilename(), "123");
             File tempFile = File.createTempFile("temp", fileName);
+            this.businessService.registerBook(tempFile, userId, dto);
+            return ResponseEntity.accepted().build();
         } catch (JsonProcessingException e) {
             log.error("Erro ao processar JSON: {}", e.getMessage(), e);
             throw new RuntimeException("Falha ao processar JSON", e);
@@ -55,8 +57,5 @@ public class BusinessController {
             throw new RuntimeException("Falha ao manipular arquivo", e);
         }
 
-
-
-        return null;
     }
 }
