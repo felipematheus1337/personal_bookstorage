@@ -1,5 +1,6 @@
 package com.bookstorage.app.models;
 
+import com.bookstorage.app.dto.BookCreateDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,6 +24,13 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public Book(BookCreateDTO dto) {
+        this.author = dto.author();
+        this.status = dto.status();
+        this.title = dto.title();
+        this.review = dto.review();
+    }
 
     public String getAuthor() {
         return author;
